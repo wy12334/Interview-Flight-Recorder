@@ -9,18 +9,34 @@
 /* Begin PBXBuildFile section */
 		BE17A8462FDB9A5600C6EB25 /* Interview_Flight_RecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8452FDB9A5600C6EB25 /* Interview_Flight_RecorderApp.swift */; };
 		BE17A8482FDB9A5600C6EB25 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8472FDB9A5600C6EB25 /* ContentView.swift */; };
-		BE17A84A2FDB9A5600C6EB25 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8492FDB9A5600C6EB25 /* Item.swift */; };
 		BE17A84C2FDB9A5800C6EB25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17A84B2FDB9A5800C6EB25 /* Assets.xcassets */; };
 		BE17A84F2FDB9A5800C6EB25 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17A84E2FDB9A5800C6EB25 /* Preview Assets.xcassets */; };
+		BE17A8612FDC100100C6EB25 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8602FDC100100C6EB25 /* Theme.swift */; };
+		BE17A8632FDC100100C6EB25 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8622FDC100100C6EB25 /* Models.swift */; };
+		BE17A8652FDC100100C6EB25 /* DataSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8642FDC100100C6EB25 /* DataSeeder.swift */; };
+		BE17A8672FDC100100C6EB25 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8662FDC100100C6EB25 /* Components.swift */; };
+		BE17A8692FDC100100C6EB25 /* InterviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8682FDC100100C6EB25 /* InterviewsView.swift */; };
+		BE17A86B2FDC100100C6EB25 /* InterviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A86A2FDC100100C6EB25 /* InterviewDetailView.swift */; };
+		BE17A86D2FDC100100C6EB25 /* ReviewPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A86C2FDC100100C6EB25 /* ReviewPlanView.swift */; };
+		BE17A86F2FDC100100C6EB25 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A86E2FDC100100C6EB25 /* StatsView.swift */; };
+		BE17A8712FDC100100C6EB25 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8702FDC100100C6EB25 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BE17A8422FDB9A5600C6EB25 /* Interview Flight Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Interview Flight Recorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE17A8452FDB9A5600C6EB25 /* Interview_Flight_RecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interview_Flight_RecorderApp.swift; sourceTree = "<group>"; };
 		BE17A8472FDB9A5600C6EB25 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BE17A8492FDB9A5600C6EB25 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BE17A84B2FDB9A5800C6EB25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE17A84E2FDB9A5800C6EB25 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BE17A8602FDC100100C6EB25 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		BE17A8622FDC100100C6EB25 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		BE17A8642FDC100100C6EB25 /* DataSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSeeder.swift; sourceTree = "<group>"; };
+		BE17A8662FDC100100C6EB25 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		BE17A8682FDC100100C6EB25 /* InterviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewsView.swift; sourceTree = "<group>"; };
+		BE17A86A2FDC100100C6EB25 /* InterviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewDetailView.swift; sourceTree = "<group>"; };
+		BE17A86C2FDC100100C6EB25 /* ReviewPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPlanView.swift; sourceTree = "<group>"; };
+		BE17A86E2FDC100100C6EB25 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		BE17A8702FDC100100C6EB25 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +71,15 @@
 			children = (
 				BE17A8452FDB9A5600C6EB25 /* Interview_Flight_RecorderApp.swift */,
 				BE17A8472FDB9A5600C6EB25 /* ContentView.swift */,
-				BE17A8492FDB9A5600C6EB25 /* Item.swift */,
+				BE17A8602FDC100100C6EB25 /* Theme.swift */,
+				BE17A8622FDC100100C6EB25 /* Models.swift */,
+				BE17A8642FDC100100C6EB25 /* DataSeeder.swift */,
+				BE17A8662FDC100100C6EB25 /* Components.swift */,
+				BE17A8682FDC100100C6EB25 /* InterviewsView.swift */,
+				BE17A86A2FDC100100C6EB25 /* InterviewDetailView.swift */,
+				BE17A86C2FDC100100C6EB25 /* ReviewPlanView.swift */,
+				BE17A86E2FDC100100C6EB25 /* StatsView.swift */,
+				BE17A8702FDC100100C6EB25 /* SettingsView.swift */,
 				BE17A84B2FDB9A5800C6EB25 /* Assets.xcassets */,
 				BE17A84D2FDB9A5800C6EB25 /* Preview Content */,
 			);
@@ -140,9 +164,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE17A86D2FDC100100C6EB25 /* ReviewPlanView.swift in Sources */,
+				BE17A8672FDC100100C6EB25 /* Components.swift in Sources */,
+				BE17A8712FDC100100C6EB25 /* SettingsView.swift in Sources */,
+				BE17A8612FDC100100C6EB25 /* Theme.swift in Sources */,
 				BE17A8482FDB9A5600C6EB25 /* ContentView.swift in Sources */,
-				BE17A84A2FDB9A5600C6EB25 /* Item.swift in Sources */,
+				BE17A8652FDC100100C6EB25 /* DataSeeder.swift in Sources */,
+				BE17A86F2FDC100100C6EB25 /* StatsView.swift in Sources */,
+				BE17A86B2FDC100100C6EB25 /* InterviewDetailView.swift in Sources */,
 				BE17A8462FDB9A5600C6EB25 /* Interview_Flight_RecorderApp.swift in Sources */,
+				BE17A8692FDC100100C6EB25 /* InterviewsView.swift in Sources */,
+				BE17A8632FDC100100C6EB25 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
