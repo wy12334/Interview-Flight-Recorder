@@ -101,9 +101,15 @@ struct ReviewTaskRow: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
-                .font(.title3)
-                .foregroundStyle(task.isDone ? Color.flightGreen : Color.secondary)
+            Button {
+                task.isDone.toggle()
+            } label: {
+                Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
+                    .font(.title3)
+                    .foregroundStyle(task.isDone ? Color.flightGreen : Color.secondary)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(task.isDone ? "标记为未完成" : "标记为已完成")
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack {
