@@ -1,2 +1,14 @@
+# macOS
 .DS_Store
 
+# Xcode 个人设置
+xcuserdata/
+*.xcuserstate
+
+# Xcode 构建缓存
+DerivedData/
+build/
+
+# Xcode 源码管理缓存
+*.xccheckout
+*.xcscmblueprint
