@@ -138,11 +138,14 @@ struct InterviewCard: View {
 }
 
 struct InterviewEditorView: View {
+    // dismiss 由当前 sheet 的环境提供，用于关闭新增或编辑页面。
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
 
+    // nil 表示新增；有对象表示编辑这条已有面试。
     let interview: InterviewRecord?
 
+    // 表单草稿由 Editor 自己拥有；取消时不会把未保存内容写回模型。
     @State private var company: String
     @State private var position: String
     @State private var date: Date
@@ -151,8 +154,25 @@ struct InterviewEditorView: View {
     @State private var score: Double
     @State private var summary: String
 
+    private var trimmedCompany: String {
+        company.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var isCompanyValid: Bool {
+        !trimmedCompany.isEmpty
+    }
+
+    private var isScoreValid: Bool {
+        (0...100).contains(score)
+    }
+
+    private var canSave: Bool {
+        isCompanyValid && isScoreValid
+    }
+
     init(interview: InterviewRecord?) {
         self.interview = interview
+        // @State 需要通过 _属性名初始化：编辑时复制旧值，新增时使用右侧默认值。
         _company = State(initialValue: interview?.company ?? "")
         _position = State(initialValue: interview?.position ?? "iOS 开发工程师")
         _date = State(initialValue: interview?.date ?? Date())
@@ -167,6 +187,13 @@ struct InterviewEditorView: View {
             Form {
                 Section("基础信息") {
                     TextField("公司名称", text: $company)
+
+                    if !isCompanyValid {
+                        Label("请输入公司名称", systemImage: "exclamationmark.circle")
+                            .font(.caption)
+                            .foregroundStyle(.red)
+                    }
+
                     TextField("岗位", text: $position)
                     DatePicker("日期", selection: $date, displayedComponents: .date)
                     TextField("轮次", text: $round)
@@ -179,7 +206,15 @@ struct InterviewEditorView: View {
 
                 Section("复盘评分") {
                     Text("自评：\(Int(score)) 分")
+                    // Slider 已从输入层把评分限制在 0～100，save() 仍会再次校验。
                     Slider(value: $score, in: 0...100, step: 1)
+
+                    if !isScoreValid {
+                        Label("评分必须在 0～100 分之间", systemImage: "exclamationmark.circle")
+                            .font(.caption)
+                            .foregroundStyle(.red)
+                    }
+
                     TextField("复盘总结", text: $summary, axis: .vertical)
                         .lineLimit(4...8)
                 }
@@ -196,16 +231,19 @@ struct InterviewEditorView: View {
                     Button("保存") {
                         save()
                     }
-                    .disabled(company.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    .disabled(!canSave)
                 }
             }
         }
     }
 
     private func save() {
+        // UI 已禁用非法保存，这层 guard 防止以后通过其他入口绕过表单校验。
+        guard canSave else { return }
+
         // 同一个表单复用新增和编辑逻辑：有对象就修改，没有对象就创建。
         if let interview {
-            interview.company = company
+            interview.company = trimmedCompany
             interview.position = position
             interview.date = date
             interview.round = round
@@ -216,7 +254,7 @@ struct InterviewEditorView: View {
             // insert 把新建的 InterviewRecord 加入 SwiftData 容器。
             modelContext.insert(
                 InterviewRecord(
-                    company: company,
+                    company: trimmedCompany,
                     position: position,
                     date: date,
                     round: round,
@@ -227,6 +265,7 @@ struct InterviewEditorView: View {
             )
         }
 
+        // SwiftData 默认自动保存；数据写入上下文后即可关闭表单。
         dismiss()
     }
 }
