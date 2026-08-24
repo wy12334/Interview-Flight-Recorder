@@ -10,13 +10,23 @@ import SwiftUI
 
 struct InterviewDetailView: View {
     @Environment(\.modelContext) private var modelContext
+    // 先查询全部问题，再通过 interviewID 找出属于当前面试的问题。
     @Query(sort: \QuestionRecord.createdAt) private var allQuestions: [QuestionRecord]
+    // 详情页必须接收当前面试，后面才能按它的 id 筛选问题。
     let interview: InterviewRecord
     @State private var isAddingQuestion = false
     @State private var editingQuestion: QuestionRecord?
+    @State private var showsOnlyUnmastered = false
 
     private var questions: [QuestionRecord] {
+        // 当前模型使用 UUID 手动关联面试和问题。
         allQuestions.filter { $0.interviewID == interview.id }
+    }
+
+    private var displayedQuestions: [QuestionRecord] {
+        // 第二层筛选只影响显示，不会删除或修改 SwiftData 中的问题。
+        guard showsOnlyUnmastered else { return questions }
+        return questions.filter { !$0.isMastered }
     }
 
     var body: some View {
@@ -44,17 +54,34 @@ struct InterviewDetailView: View {
                 .padding(18)
                 .background(.white, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
 
-                SectionHeader(title: "面试问题", subtitle: "长按问题可以编辑或删除")
+                SectionHeader(title: "面试问题", subtitle: "长按问题可以编辑、切换掌握状态或删除")
 
                 if questions.isEmpty {
                     EmptyStateView(icon: "questionmark.bubble", title: "暂无问题", subtitle: "把面试中被问到的问题逐条记录下来。")
                 } else {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Toggle("只显示未掌握问题", isOn: $showsOnlyUnmastered)
+                        Text("当前显示 \(displayedQuestions.count) / 全部 \(questions.count) 题")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(16)
+                    .background(.white, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+
+                    if displayedQuestions.isEmpty {
+                        EmptyStateView(icon: "checkmark.seal", title: "没有未掌握问题", subtitle: "当前面试的问题已经全部掌握。")
+                    }
+
                     VStack(spacing: 12) {
-                        ForEach(questions) { question in
+                        // ForEach 使用当前面试经过掌握状态筛选后的问题。
+                        ForEach(displayedQuestions) { question in
                             QuestionCard(question: question)
                                 .contextMenu {
                                     Button("编辑") {
                                         editingQuestion = question
+                                    }
+                                    Button(question.isMastered ? "标记为未掌握" : "标记为已掌握") {
+                                        question.isMastered.toggle()
                                     }
                                     Button(role: .destructive) {
                                         modelContext.delete(question)
@@ -80,6 +107,7 @@ struct InterviewDetailView: View {
             }
         }
         .sheet(isPresented: $isAddingQuestion) {
+            // question 为 nil，表示为当前 interview 新增问题。
             QuestionEditorView(interview: interview, question: nil)
         }
         .sheet(item: $editingQuestion) { question in
@@ -95,6 +123,10 @@ struct QuestionCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 CategoryPill(text: question.category.rawValue, color: Color.flightBlue)
+                CategoryPill(
+                    text: question.isMastered ? "已掌握" : "未掌握",
+                    color: question.isMastered ? Color.flightGreen : Color.flightOrange
+                )
                 Spacer()
                 Label("难度 \(question.difficulty)", systemImage: "flame")
                     .font(.caption)
@@ -145,6 +177,7 @@ struct QuestionEditorView: View {
     @State private var difficulty: Double
     @State private var myAnswer: String
     @State private var improvement: String
+    @State private var isMastered: Bool
 
     init(interview: InterviewRecord, question: QuestionRecord?) {
         self.interview = interview
@@ -154,6 +187,7 @@ struct QuestionEditorView: View {
         _difficulty = State(initialValue: Double(question?.difficulty ?? 3))
         _myAnswer = State(initialValue: question?.myAnswer ?? "")
         _improvement = State(initialValue: question?.improvement ?? "")
+        _isMastered = State(initialValue: question?.isMastered ?? false)
     }
 
     var body: some View {
@@ -175,6 +209,7 @@ struct QuestionEditorView: View {
                         .lineLimit(3...8)
                     TextField("改进建议", text: $improvement, axis: .vertical)
                         .lineLimit(3...8)
+                    Toggle("已掌握", isOn: $isMastered)
                 }
             }
             .navigationTitle(question == nil ? "新增问题" : "编辑问题")
@@ -202,14 +237,17 @@ struct QuestionEditorView: View {
             question.difficulty = Int(difficulty)
             question.myAnswer = myAnswer
             question.improvement = improvement
+            question.isMastered = isMastered
         } else {
+            // 用当前面试的 id 建立问题归属关系。
             let newQuestion = QuestionRecord(
                 interviewID: interview.id,
                 content: content,
                 categoryRawValue: category.rawValue,
                 difficulty: Int(difficulty),
                 myAnswer: myAnswer,
-                improvement: improvement
+                improvement: improvement,
+                isMastered: isMastered
             )
             modelContext.insert(newQuestion)
         }
