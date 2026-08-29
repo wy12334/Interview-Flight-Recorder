@@ -17,11 +17,6 @@ struct ReviewPlanView: View {
     // 只属于当前页面的筛选状态，不需要保存进 SwiftData。
     @State private var showsOnlyOverdue = false
 
-    private var startOfToday: Date {
-        // 用“今天零点”比较日期，避免今天到期的任务在当天稍晚时被误判为逾期。
-        Calendar.current.startOfDay(for: Date())
-    }
-
     private var unfinishedTasks: [ReviewTaskRecord] {
         // isDone 为 false 的任务显示在“待完成”。
         tasks.filter { !$0.isDone }
@@ -30,7 +25,9 @@ struct ReviewPlanView: View {
     private var displayedUnfinishedTasks: [ReviewTaskRecord] {
         // 开启筛选时，在未完成任务的基础上继续筛出截止日期早于今天的任务。
         guard showsOnlyOverdue else { return unfinishedTasks }
-        return unfinishedTasks.filter { $0.dueDate < startOfToday }
+        return unfinishedTasks.filter {
+            isReviewTaskOverdue(dueDate: $0.dueDate, isDone: $0.isDone)
+        }
     }
 
     private var finishedTasks: [ReviewTaskRecord] {
@@ -130,8 +127,8 @@ struct ReviewTaskRow: View {
     let task: ReviewTaskRecord
 
     private var isOverdue: Bool {
-        // 业务规则：只有“截止日期早于今天”并且“尚未完成”才算逾期。
-        !task.isDone && task.dueDate < Calendar.current.startOfDay(for: Date())
+        // 逾期规则由纯函数统一维护，筛选和卡片颜色不会出现两套判断。
+        isReviewTaskOverdue(dueDate: task.dueDate, isDone: task.isDone)
     }
 
     var body: some View {

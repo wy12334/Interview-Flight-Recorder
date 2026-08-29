@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A10000000000000000000001 /* AppLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* AppLogic.swift */; };
+		A20000000000000000000001 /* InterviewFlightRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* InterviewFlightRecorderTests.swift */; };
+		A20000000000000000000003 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20000000000000000000004 /* XCTest.framework */; };
 		BE17A8462FDB9A5600C6EB25 /* Interview_Flight_RecorderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8452FDB9A5600C6EB25 /* Interview_Flight_RecorderApp.swift */; };
 		BE17A8482FDB9A5600C6EB25 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8472FDB9A5600C6EB25 /* ContentView.swift */; };
 		BE17A84C2FDB9A5800C6EB25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE17A84B2FDB9A5800C6EB25 /* Assets.xcassets */; };
@@ -22,7 +25,21 @@
 		BE17A8712FDC100100C6EB25 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE17A8702FDC100100C6EB25 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A20000000000000000000010 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE17A83A2FDB9A5600C6EB25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE17A8412FDB9A5600C6EB25;
+			remoteInfo = "Interview Flight Recorder";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		A10000000000000000000002 /* AppLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogic.swift; sourceTree = "<group>"; };
+		A20000000000000000000002 /* InterviewFlightRecorderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterviewFlightRecorderTests.swift; sourceTree = "<group>"; };
+		A20000000000000000000004 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = System/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
+		A20000000000000000000005 /* Interview Flight RecorderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Interview Flight RecorderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE17A8422FDB9A5600C6EB25 /* Interview Flight Recorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Interview Flight Recorder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE17A8452FDB9A5600C6EB25 /* Interview_Flight_RecorderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interview_Flight_RecorderApp.swift; sourceTree = "<group>"; };
 		BE17A8472FDB9A5600C6EB25 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +57,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A20000000000000000000006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20000000000000000000003 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE17A83F2FDB9A5600C6EB25 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -54,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				BE17A8442FDB9A5600C6EB25 /* Interview Flight Recorder */,
+				A20000000000000000000007 /* Interview Flight RecorderTests */,
 				BE17A8432FDB9A5600C6EB25 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				BE17A8422FDB9A5600C6EB25 /* Interview Flight Recorder.app */,
+				A20000000000000000000005 /* Interview Flight RecorderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,6 +98,7 @@
 			children = (
 				BE17A8452FDB9A5600C6EB25 /* Interview_Flight_RecorderApp.swift */,
 				BE17A8472FDB9A5600C6EB25 /* ContentView.swift */,
+				A10000000000000000000002 /* AppLogic.swift */,
 				BE17A8602FDC100100C6EB25 /* Theme.swift */,
 				BE17A8622FDC100100C6EB25 /* Models.swift */,
 				BE17A8642FDC100100C6EB25 /* DataSeeder.swift */,
@@ -86,6 +114,14 @@
 			path = "Interview Flight Recorder";
 			sourceTree = "<group>";
 		};
+		A20000000000000000000007 /* Interview Flight RecorderTests */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000002 /* InterviewFlightRecorderTests.swift */,
+			);
+			path = "Interview Flight RecorderTests";
+			sourceTree = "<group>";
+		};
 		BE17A84D2FDB9A5800C6EB25 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +133,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A20000000000000000000008 /* Interview Flight RecorderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2000000000000000000000C /* Build configuration list for PBXNativeTarget "Interview Flight RecorderTests" */;
+			buildPhases = (
+				A20000000000000000000009 /* Sources */,
+				A20000000000000000000006 /* Frameworks */,
+				A2000000000000000000000A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A20000000000000000000011 /* PBXTargetDependency */,
+			);
+			name = "Interview Flight RecorderTests";
+			productName = "Interview Flight RecorderTests";
+			productReference = A20000000000000000000005 /* Interview Flight RecorderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BE17A8412FDB9A5600C6EB25 /* Interview Flight Recorder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE17A8522FDB9A5800C6EB25 /* Build configuration list for PBXNativeTarget "Interview Flight Recorder" */;
@@ -124,6 +178,10 @@
 				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
+					A20000000000000000000008 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = BE17A8412FDB9A5600C6EB25;
+					};
 					BE17A8412FDB9A5600C6EB25 = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -143,11 +201,19 @@
 			projectRoot = "";
 			targets = (
 				BE17A8412FDB9A5600C6EB25 /* Interview Flight Recorder */,
+				A20000000000000000000008 /* Interview Flight RecorderTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A2000000000000000000000A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE17A8402FDB9A5600C6EB25 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,10 +226,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A20000000000000000000009 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20000000000000000000001 /* InterviewFlightRecorderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE17A83E2FDB9A5600C6EB25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10000000000000000000001 /* AppLogic.swift in Sources */,
 				BE17A86D2FDC100100C6EB25 /* ReviewPlanView.swift in Sources */,
 				BE17A8672FDC100100C6EB25 /* Components.swift in Sources */,
 				BE17A8712FDC100100C6EB25 /* SettingsView.swift in Sources */,
@@ -180,7 +255,49 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A20000000000000000000011 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE17A8412FDB9A5600C6EB25 /* Interview Flight Recorder */;
+			targetProxy = A20000000000000000000010 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		A2000000000000000000000D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V6GYWXJQN3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wuyue.Interview-Flight-RecorderTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Interview Flight Recorder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Interview Flight Recorder";
+			};
+			name = Debug;
+		};
+		A2000000000000000000000E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V6GYWXJQN3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wuyue.Interview-Flight-RecorderTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Interview Flight Recorder.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Interview Flight Recorder";
+			};
+			name = Release;
+		};
 		BE17A8502FDB9A5800C6EB25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -361,6 +478,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A2000000000000000000000C /* Build configuration list for PBXNativeTarget "Interview Flight RecorderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2000000000000000000000D /* Debug */,
+				A2000000000000000000000E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BE17A83D2FDB9A5600C6EB25 /* Build configuration list for PBXProject "Interview Flight Recorder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

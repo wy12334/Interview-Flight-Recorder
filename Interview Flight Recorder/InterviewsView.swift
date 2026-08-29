@@ -22,11 +22,8 @@ struct InterviewsView: View {
     @State private var searchText = ""
 
     private var filteredInterviews: [InterviewRecord] {
-        let keyword = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        // 没有关键词时显示 @Query 返回的完整列表；有关键词时只按公司名称过滤。
-        guard !keyword.isEmpty else { return interviews }
-        return interviews.filter { $0.company.localizedStandardContains(keyword) }
+        // 搜索的大小写与首尾空格规则放在纯函数中，页面只负责过滤数组。
+        interviews.filter { companyMatchesSearch(company: $0.company, searchText: searchText) }
     }
 
     var body: some View {
@@ -163,7 +160,7 @@ struct InterviewEditorView: View {
     }
 
     private var isScoreValid: Bool {
-        (0...100).contains(score)
+        isInterviewScoreValid(score)
     }
 
     private var canSave: Bool {
