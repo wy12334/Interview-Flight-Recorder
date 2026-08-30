@@ -3,27 +3,22 @@
 //  Interview Flight Recorder
 //
 //  Created by wyy on 2026/6/11.
-//复习页
 
 import SwiftData
 import SwiftUI
 
 struct ReviewPlanView: View {
     @Environment(\.modelContext) private var modelContext
-    // @Query 会按截止日期读取任务，并在任务状态变化后自动刷新页面。
     @Query(sort: \ReviewTaskRecord.dueDate) private var tasks: [ReviewTaskRecord]
     @State private var isAddingTask = false
     @State private var editingTask: ReviewTaskRecord?
-    // 只属于当前页面的筛选状态，不需要保存进 SwiftData。
     @State private var showsOnlyOverdue = false
 
     private var unfinishedTasks: [ReviewTaskRecord] {
-        // isDone 为 false 的任务显示在“待完成”。
         tasks.filter { !$0.isDone }
     }
 
     private var displayedUnfinishedTasks: [ReviewTaskRecord] {
-        // 开启筛选时，在未完成任务的基础上继续筛出截止日期早于今天的任务。
         guard showsOnlyOverdue else { return unfinishedTasks }
         return unfinishedTasks.filter {
             isReviewTaskOverdue(dueDate: $0.dueDate, isDone: $0.isDone)
@@ -31,7 +26,6 @@ struct ReviewPlanView: View {
     }
 
     private var finishedTasks: [ReviewTaskRecord] {
-        // isDone 为 true 的任务显示在“已完成”。
         tasks.filter(\.isDone)
     }
 
@@ -58,7 +52,6 @@ struct ReviewPlanView: View {
 
                     TaskSection(title: showsOnlyOverdue ? "逾期未完成" : "待完成", tasks: displayedUnfinishedTasks, editingTask: $editingTask)
 
-                    // 已完成任务不属于“逾期未完成”，筛选开启时不显示这个分组。
                     if !showsOnlyOverdue {
                         TaskSection(title: "已完成", tasks: finishedTasks, editingTask: $editingTask)
                     }
@@ -127,24 +120,19 @@ struct ReviewTaskRow: View {
     let task: ReviewTaskRecord
 
     private var isOverdue: Bool {
-        // 逾期规则由纯函数统一维护，筛选和卡片颜色不会出现两套判断。
         isReviewTaskOverdue(dueDate: task.dueDate, isDone: task.isDone)
     }
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            // 学习重点：这里必须使用 Button，单独的 Image 只能显示图标，不能响应点击。
             Button {
-                // false/true 相互切换；@Query 随后驱动任务在两个分组之间移动。
                 task.isDone.toggle()
             } label: {
                 Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
                     .font(.title3)
                     .foregroundStyle(task.isDone ? Color.flightGreen : Color.secondary)
             }
-            // 保留圆圈图标原有外观，不使用系统默认按钮样式。
             .buttonStyle(.plain)
-            // 告诉 VoiceOver 点击后会执行的操作，提升无障碍体验。
             .accessibilityLabel(task.isDone ? "标记为未完成" : "标记为已完成")
 
             VStack(alignment: .leading, spacing: 6) {
@@ -249,7 +237,6 @@ struct ReviewTaskEditorView: View {
     }
 
     private func save() {
-        // task 存在时更新原任务；为 nil 时插入一条新任务。
         if let task {
             task.title = title
             task.categoryRawValue = category.rawValue

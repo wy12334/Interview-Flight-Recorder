@@ -38,6 +38,7 @@ enum InterviewResult: String, CaseIterable, Identifiable {
     }
 }
 
+// Shared by questions and review tasks to keep persisted category values consistent.
 enum QuestionCategory: String, CaseIterable, Identifiable {
     case swift = "Swift"
     case swiftUI = "SwiftUI"

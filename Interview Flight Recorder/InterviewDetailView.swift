@@ -10,21 +10,17 @@ import SwiftUI
 
 struct InterviewDetailView: View {
     @Environment(\.modelContext) private var modelContext
-    // 先查询全部问题，再通过 interviewID 找出属于当前面试的问题。
     @Query(sort: \QuestionRecord.createdAt) private var allQuestions: [QuestionRecord]
-    // 详情页必须接收当前面试，后面才能按它的 id 筛选问题。
     let interview: InterviewRecord
     @State private var isAddingQuestion = false
     @State private var editingQuestion: QuestionRecord?
     @State private var showsOnlyUnmastered = false
 
     private var questions: [QuestionRecord] {
-        // 当前模型使用 UUID 手动关联面试和问题。
         allQuestions.filter { $0.interviewID == interview.id }
     }
 
     private var displayedQuestions: [QuestionRecord] {
-        // 第二层筛选只影响显示，不会删除或修改 SwiftData 中的问题。
         guard showsOnlyUnmastered else { return questions }
         return questions.filter { !$0.isMastered }
     }
@@ -73,7 +69,6 @@ struct InterviewDetailView: View {
                     }
 
                     VStack(spacing: 12) {
-                        // ForEach 使用当前面试经过掌握状态筛选后的问题。
                         ForEach(displayedQuestions) { question in
                             QuestionCard(question: question)
                                 .contextMenu {
@@ -107,7 +102,6 @@ struct InterviewDetailView: View {
             }
         }
         .sheet(isPresented: $isAddingQuestion) {
-            // question 为 nil，表示为当前 interview 新增问题。
             QuestionEditorView(interview: interview, question: nil)
         }
         .sheet(item: $editingQuestion) { question in
@@ -239,7 +233,6 @@ struct QuestionEditorView: View {
             question.improvement = improvement
             question.isMastered = isMastered
         } else {
-            // 用当前面试的 id 建立问题归属关系。
             let newQuestion = QuestionRecord(
                 interviewID: interview.id,
                 content: content,

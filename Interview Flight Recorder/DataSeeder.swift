@@ -9,6 +9,7 @@ import Foundation
 import SwiftData
 
 enum DataSeeder {
+    // Empty-store detection is sufficient for demo data; production seeding would use a versioned flag.
     static func seedIfNeeded(modelContext: ModelContext, interviewCount: Int) {
         guard interviewCount == 0 else {
             return
